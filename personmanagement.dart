@@ -158,15 +158,6 @@ void arrangeInfo(){
   stdout.write('Hãy chọn cách mảng thông tin bạn muốn sắp xếp (1. Công nhân, 2. Sinh viên): ');
   int type = int.parse(stdin.readLineSync()!);
 
-  if( type == 1){
-    stdout.write('Xin hãy chọn cách sắp xếp mong muốn\n1. Theo tên\n2. Theo tuổi\n3. Theo năm sinh\n4. Theo mức lương');
-    int choice = int.parse(stdin.readLineSync()!);
-
-    if( choice == 1){
-      
-    }
-
-  }
 
 
 
