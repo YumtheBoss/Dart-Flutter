@@ -9,8 +9,16 @@ class PersonManagement{
 
 void addInfo(){
 
+  int type;
+  
+ do{
   stdout.write('Hãy nhập thông tin (1. Công nhân: , 2. Sinh viên: )'); //Xác định xem thông tin nhập từ bàn phím là của mảng nào.
-  int type = int.parse(stdin.readLineSync()!);
+   type = int.parse(stdin.readLineSync()!);
+
+  if( type < 1 || type > 2){
+    print('Xin hãy nhập lại giá trị hợp lệ (1. Công nhân, 2.Sinh viên)');
+  }
+ }while( type < 1 || type > 2);
 
   stdout.write('Hãy nhập họ và tên: ');
   String name = stdin.readLineSync()!;
@@ -144,3 +152,23 @@ void editInfo(){
   print('Đã sửa thông tin thành công');
 }
 }
+
+//Sắp xếp thông tin đã nhập 
+void arrangeInfo(){
+  stdout.write('Hãy chọn cách mảng thông tin bạn muốn sắp xếp (1. Công nhân, 2. Sinh viên): ');
+  int type = int.parse(stdin.readLineSync()!);
+
+  if( type == 1){
+    stdout.write('Xin hãy chọn cách sắp xếp mong muốn\n1. Theo tên\n2. Theo tuổi\n3. Theo năm sinh\n4. Theo mức lương');
+    int choice = int.parse(stdin.readLineSync()!);
+
+    if( choice == 1){
+      
+    }
+
+  }
+
+
+
+}
+
