@@ -10,6 +10,7 @@ void main(){
     print('2. Xóa thông tin');
     print('3. Hiển thị danh sách');
     print('4. Chỉnh sửa thông tin');
+    print('5. Sắp xếp lại danh sách');
 
     stdout.write('Hãy chọn tác vụ:');
     int choice = int.parse(stdin.readLineSync()!);
@@ -31,6 +32,9 @@ void main(){
       case 4:
       pm.editInfo();
       break;
+
+      case 5:
+      pm.arrangeInfo();
     }
   }
 }
