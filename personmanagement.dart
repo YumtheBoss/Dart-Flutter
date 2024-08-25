@@ -1,12 +1,12 @@
 import 'dart:io';
-import 'person.dart';
-import 'student.dart';
-import 'cong_nhan.dart';
+import 'package:person_management/person.dart';
+import 'package:person_management/student.dart';
+import 'package:person_management/cong_nhan.dart';
 
 class PersonManagement{
 
   List<Person> person = [];
-
+  
 void addInfo(){
 
   int type;
@@ -36,15 +36,23 @@ void addInfo(){
 
 //Phân loại thông tin từ bàn phím để xác định xem đối tượng thuộc loại 1 (Công nhân ) hay 2 (Sinh viên).
   if( type == 1){
-    stdout.write('Hãy nhập vị trí công việc: ');
-    String postion = stdin.readLineSync()!;
+    String position;
+
+    do{
+      stdout.write('Hãy nhập vị trí công việc: ');
+       position = stdin.readLineSync()!;
+
+      if( position != 'Trưởng phòng' && position != 'Nhân viên'){
+        print('Thông tin về chức vụ hiện không tồn tại, xin hãy nhập lại');
+      }
+    }while(position != 'Trưởng phòng' && position != 'Nhân viên');
 
     stdout.write('Hãy nhập địa chỉ làm việc: ');
     String address = stdin.readLineSync()!;
 
     stdout.write('Hãy nhập mức lương: ');
     int salary = int.parse(stdin.readLineSync()!);
-    person.add(Personel(postion, address, salary, name, age, hometown, year)); //Thêm thông tin vào trong công nhân.
+    person.add(Personel(position, address, salary, name, age, hometown, year)); //Thêm thông tin vào trong công nhân.
   }else{
     stdout.write('Hãy nhập tên trường: ');
     String school = stdin.readLineSync()!;
@@ -125,7 +133,7 @@ void editInfo(){
     if(persons is Personel){
       stdout.write('Hãy nhập chức vụ mới: ');
       String newposition = stdin.readLineSync()!;
-      persons.postion = newposition;
+      persons.position = newposition;
 
       stdout.write('Hãy nhập địa chỉ làm việc mới: ');
       String newaddress = stdin.readLineSync()!;
@@ -154,19 +162,37 @@ void editInfo(){
 
 
 //Sắp xếp thông tin đã nhập 
-void arrangeInfo(){
+void arrangeInfo(List<String> positions){
   stdout.write('Hãy chọn cách mảng thông tin bạn muốn sắp xếp (1. Công nhân, 2. Sinh viên): ');
   int type = int.parse(stdin.readLineSync()!);
   
-  stdout.write('Hãy chọn cách sắp xếp mong muốn (1. Theo tên\n2. Theo tuổi\n3. Theo chức vụ\n4. Theo mức lương)');
+  stdout.write('Hãy chọn cách sắp xếp mong muốn (1. Theo tên\n2. Theo tuổi\n3. Theo chức vụ\n)');
   int option = int.parse(stdin.readLineSync()!);
   
   switch(type){
-    case 1: //Sắp xếp theo bảng chữ cái 
+    case 1: //Sắp xếp theo tên.
       if(option == 1){
-        Person.sort((a,b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
+        person.sort((a,b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
+        print('Danh sách đã được sắp xếp theo tên');
+        break;
       }
 
+    case 2: //Sắp xếp theo tuổi
+      if(option == 2){
+        person.sort((a, b) => a.age.compareTo(b.age));
+        print('Danh sách đã được sắp xếp theo tuổi');
+        break;
+      }
+
+    case 3: //Sắp xếp theo chức vụ 
+      if(option == 3){
+        Personel.sort((a,b){
+          int indexA = positions.indexWhere((pos) => pos == a.position);
+          int indexB = positions.indexWhere((pos) => pos == b.position);
+          return indexA.compareTo(indexB);
+        });
+        break;
+      }
   }
 }
 }
