@@ -167,7 +167,7 @@ void arrangeInfo(List<String> positions){
   stdout.write('Hãy chọn cách mảng thông tin bạn muốn sắp xếp (1. Công nhân, 2. Sinh viên): ');
   int type = int.parse(stdin.readLineSync()!);
   
-  stdout.write('Hãy chọn cách sắp xếp mong muốn (\n1. Theo tên\n2. Theo tuổi\n3. Theo chức vụ\n)');
+  stdout.write('Hãy chọn cách sắp xếp mong muốn (\n1. Theo tên\n2. Theo tuổi\n3. Theo chức vụ)');
   int option = int.parse(stdin.readLineSync()!);
   
   switch(type){
@@ -182,26 +182,25 @@ void arrangeInfo(List<String> positions){
       if(option == 2){
         person.sort((a, b) => a.age.compareTo(b.age));
         print('Danh sách đã được sắp xếp theo tuổi\n');
-        for(var persons in person){
-          print(persons);
-        }
         break;
       }
 
     case 3: //Sắp xếp theo chức vụ 
       if(option == 3){
-        Personel.sort((a,b){
-          int indexA = positions.indexWhere((pos) => pos == a.positions);
-          int indexB = positions.indexWhere((pos) => pos == b.positions);
-          return indexA.compareTo(indexB);
-        });
-        print('Danh sách đã được sắp xếp thành công\n');
-        for(var x in positions){
-          print(x);
+        Map<String,int> order = {};
+
+          for(int i = 0; i < positions.length; i++){ order[positions[i]] = i;
         }
 
+        person.sort((a, b) => order[a]!.compareTo(order[b]!));
+
+        print('Danh sách đã được sắp xếp theo chức vụ\n');
         break;
       }
+  }
+
+  for(var persons in person){
+    print(persons);
   }
 }
 }
