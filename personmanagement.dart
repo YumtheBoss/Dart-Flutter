@@ -36,16 +36,17 @@ void addInfo(){
 
 //Phân loại thông tin từ bàn phím để xác định xem đối tượng thuộc loại 1 (Công nhân ) hay 2 (Sinh viên).
   if( type == 1){
-    String position;
+    
+   String position = '';
 
-    do{
-      stdout.write('Hãy nhập vị trí công việc: ');
-       position = stdin.readLineSync()!;
+    while (position != 'Truong phong' && position != 'Nhan vien') {
+        stdout.write('Hãy nhập vị trí công việc: ');
+        position = stdin.readLineSync()?.trim() ?? '';
 
-      if( position != 'Trưởng phòng' && position != 'Nhân viên'){
-        print('Thông tin về chức vụ hiện không tồn tại, xin hãy nhập lại');
-      }
-    }while(position != 'Trưởng phòng' && position != 'Nhân viên');
+        if (position != 'Truong phong' && position != 'Nhan vien') {
+            print('Thông tin về chức vụ hiện không tồn tại, xin hãy nhập lại');
+        }
+    }
 
     stdout.write('Hãy nhập địa chỉ làm việc: ');
     String address = stdin.readLineSync()!;
@@ -166,31 +167,39 @@ void arrangeInfo(List<String> positions){
   stdout.write('Hãy chọn cách mảng thông tin bạn muốn sắp xếp (1. Công nhân, 2. Sinh viên): ');
   int type = int.parse(stdin.readLineSync()!);
   
-  stdout.write('Hãy chọn cách sắp xếp mong muốn (1. Theo tên\n2. Theo tuổi\n3. Theo chức vụ\n)');
+  stdout.write('Hãy chọn cách sắp xếp mong muốn (\n1. Theo tên\n2. Theo tuổi\n3. Theo chức vụ\n)');
   int option = int.parse(stdin.readLineSync()!);
   
   switch(type){
     case 1: //Sắp xếp theo tên.
       if(option == 1){
         person.sort((a,b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
-        print('Danh sách đã được sắp xếp theo tên');
+        print('Danh sách đã được sắp xếp theo tên\n');
         break;
       }
 
     case 2: //Sắp xếp theo tuổi
       if(option == 2){
         person.sort((a, b) => a.age.compareTo(b.age));
-        print('Danh sách đã được sắp xếp theo tuổi');
+        print('Danh sách đã được sắp xếp theo tuổi\n');
+        for(var persons in person){
+          print(persons);
+        }
         break;
       }
 
     case 3: //Sắp xếp theo chức vụ 
       if(option == 3){
         Personel.sort((a,b){
-          int indexA = positions.indexWhere((pos) => pos == a.position);
-          int indexB = positions.indexWhere((pos) => pos == b.position);
+          int indexA = positions.indexWhere((pos) => pos == a.positions);
+          int indexB = positions.indexWhere((pos) => pos == b.positions);
           return indexA.compareTo(indexB);
         });
+        print('Danh sách đã được sắp xếp thành công\n');
+        for(var x in positions){
+          print(x);
+        }
+
         break;
       }
   }
