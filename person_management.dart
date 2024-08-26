@@ -4,6 +4,7 @@ import "package:person_management/personmanagement.dart";
 
 void main(){
   PersonManagement pm = PersonManagement();
+  List<String> positions = ["Trưởng phòng", "Nhân viên"];
 
   while(true){
     print('1. Thêm thông tin');
@@ -34,7 +35,7 @@ void main(){
       break;
 
       case 5:
-      pm.arrangeInfo();
+      pm.arrangeInfo(positions);
     }
   }
 }
