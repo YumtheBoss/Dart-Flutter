@@ -8,8 +8,11 @@ class Person{
   int age; //Tuổi
   String hometown; //Quê quán
   int year; //Năm sinh
+  String position; //Vị trí công việc
 
-  Person(this.name, this.age, this.hometown, this.year);
+  Person(this.name, this.age, this.hometown, this.year, this.position);
+
+
 
   @override
   String toString(){
@@ -17,4 +20,8 @@ class Person{
   }
 
   static void add(Personel personel) {}
+
+  static void sort(Function(dynamic a, dynamic b) param0) {}
+
+  
 }
