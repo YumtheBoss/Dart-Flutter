@@ -39,11 +39,9 @@ void addInfo(){
   if( type == 1){
     
    String position = '';
-
     while (position != 'Truong phong' && position != 'Nhan vien') {
         stdout.write('Hãy nhập vị trí công việc: ');
         position = stdin.readLineSync()?.trim() ?? '';
-
         if (position != 'Truong phong' && position != 'Nhan vien') {
             print('Thông tin về chức vụ hiện không tồn tại, xin hãy nhập lại');
         }
