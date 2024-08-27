@@ -7,6 +7,7 @@ class PersonManagement{
 
   List<Person> person = [];
   
+
 void addInfo(){
 
   int type;
@@ -53,7 +54,7 @@ void addInfo(){
 
     stdout.write('Hãy nhập mức lương: ');
     int salary = int.parse(stdin.readLineSync()!);
-    person.add(Personel(position, address, salary, name, age, hometown, year)); //Thêm thông tin vào trong công nhân.
+    person.add(Personel( address, salary, name, age, hometown, year, position)); //Thêm thông tin vào trong công nhân.
   }else{
     stdout.write('Hãy nhập tên trường: ');
     String school = stdin.readLineSync()!;
@@ -72,14 +73,24 @@ void addInfo(){
 
     stdout.write('Hãy nhập điểm A: ');
     int A = int.parse(stdin.readLineSync()!);
+    if( A < 0){
+      stdout.write('Xin hãy nhập giá trị hợp lệ: ');
+    }
 
     stdout.write('Hãy nhập điểm B: ');
     int B = int.parse(stdin.readLineSync()!);
+    if( B < 0){
+      stdout.write('Xin hãy nhập giá trị hợp lệ: ');
+    }
 
     stdout.write('Hãy nhập điểm C: ');
     int C = int.parse(stdin.readLineSync()!);
+    if( C < 0){
+      stdout.write('Xin hãy nhập giá trị hợp lệ: ');
+    }
 
-    person.add(Student(school, subject, subname, code, credits, A, B, C, name, age, hometown, year)); //Thêm thông tin về sinh viên.
+    String position = '';
+    person.add(Student(school, subject, subname, code, credits, A, B, C, name, age, hometown, year, position)); //Thêm thông tin về sinh viên.
   }
 
   print('Đã thêm thông tin thành công\n');
@@ -163,14 +174,12 @@ void editInfo(){
 
 
 //Sắp xếp thông tin đã nhập 
-void arrangeInfo(List<String> positions){
-  stdout.write('Hãy chọn cách mảng thông tin bạn muốn sắp xếp (1. Công nhân, 2. Sinh viên): ');
-  int type = int.parse(stdin.readLineSync()!);
-  
+void arrangeInfo(){
+
   stdout.write('Hãy chọn cách sắp xếp mong muốn (\n1. Theo tên\n2. Theo tuổi\n3. Theo chức vụ)');
   int option = int.parse(stdin.readLineSync()!);
   
-  switch(type){
+  switch(option){
     case 1: //Sắp xếp theo tên.
       if(option == 1){
         person.sort((a,b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
@@ -187,12 +196,15 @@ void arrangeInfo(List<String> positions){
 
     case 3: //Sắp xếp theo chức vụ 
       if(option == 3){
-        Map<String,int> order = {};
 
-          for(int i = 0; i < positions.length; i++){ order[positions[i]] = i;
-        }
+        
+        Map<String,int> order = {
+          'Truong phong': 0,
+          'Nhan vien': 1
+        };
 
-        person.sort((a, b) => order[a]!.compareTo(order[b]!));
+      
+        person.sort((a, b) => order[a.position]!.compareTo(order[b.position]!));
 
         print('Danh sách đã được sắp xếp theo chức vụ\n');
         break;
