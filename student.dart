@@ -12,7 +12,7 @@ class Student extends Person{
   int B; //Điểm B 
   int C; //Điểm C
 
-  Student(this.school, this.subject, this.subname, this.code, this.credits, this.A, this.B, this.C, String name, int age, String hometown, int year) : super(name, age, hometown, year);
+  Student(this.school, this.subject, this.subname, this.code, this.credits, this.A, this.B, this.C, String name, int age, String hometown, int year, String position) : super(name, age, hometown, year, position);
 
 //Ghi đè phương thức của Person.dart
   @override
