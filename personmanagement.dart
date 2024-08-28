@@ -176,41 +176,57 @@ void arrangeInfo(){
 
   stdout.write('Hãy chọn cách sắp xếp mong muốn (\n1. Theo tên\n2. Theo tuổi\n3. Theo chức vụ)');
   int option = int.parse(stdin.readLineSync()!);
+
+  stdout.write('Hãy chọn cách sắp xếp mong muốn (1. Theo thứ tự giảm dần 2. Theo thứ tự tăng dần)');
+        int sortOrder = int.parse(stdin.readLineSync()!);
+  
+  bool isUp = sortOrder == 1;
   
   switch(option){
     case 1: //Sắp xếp theo tên.
-      if(option == 1){
-        person.sort((a,b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
-        print('Danh sách đã được sắp xếp theo tên\n');
-        break;
-      }
+          if(isUp){
+              person.sort((a,b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
+              print('Danh sách đã được sắp xếp theo tên\n');
+              break;
+          }else{
+            person.sort((a,b) => b.name.toLowerCase().compareTo(a.name.toLowerCase()));
+            print('Danh sách đã được sắp xếp theo tên\n');
+            break;
+          }
 
     case 2: //Sắp xếp theo tuổi
-      if(option == 2){
-        person.sort((a, b) => a.age.compareTo(b.age));
-        print('Danh sách đã được sắp xếp theo tuổi\n');
-        break;
-      }
+          if(isUp){
+            person.sort((a, b) => a.age.compareTo(b.age));
+            print('Danh sách đã được sắp xếp theo thứ tự tăng dần\n');
+            break;
+          }else{
+            person.sort((a, b) => b.age.compareTo(a.age));
+            print('Danh sách đã được sắp xếp theo thứ tự giảm dần\n');
+            break;
+          }
 
     case 3: //Sắp xếp theo chức vụ 
-      if(option == 3){
-
-        
         Map<String,int> order = {
           'Truong phong': 0,
           'Nhan vien': 1
         };
 
-      
-        person.sort((a, b) => order[a.position]!.compareTo(order[b.position]!));
-
-        print('Danh sách đã được sắp xếp theo chức vụ\n');
-        break;
+        if(isUp){
+          person.sort((a, b) => order[a.position]!.compareTo(order[b.position]!));
+          print('Danh sách đã được sắp xếp theo mức độ tăng dần\n');
+          break;
+          }else{
+            person.sort((a, b) => order[b.position]!.compareTo(order[a.position]!));
+            print('Danh sách đã được sắp xếp theo mức độ giảm dần\n');
+            break;
+          }
+        }
+        
+        for(var persons in person){
+        print(persons);
       }
   }
 
-  for(var persons in person){
-    print(persons);
+  
   }
-}
-}
+
